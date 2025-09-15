@@ -1,16 +1,24 @@
 #!/usr/bin/env python3
 
+import sys
 import argparse
-import time
+from datetime import datetime
+
+VERSION = (1, 0)
 
 parser = argparse.ArgumentParser(
     prog="year-progress.py", description="Display how many days you lost this year", allow_abbrev=False
 )
-parser.add_argument("--version", "-v", action="version", version="develop", help="Display version info")
+parser.add_argument("--version", "-v", action="store_true",
+                    help="Display version info")
 parser.add_argument("--width", type=int, help="The progress bar width")
 args = parser.parse_args()
 
-if args.width != None:
+if args.version:
+    print(f'v2.0-{VERSION[0]}.{VERSION[1]}')
+    sys.exit()
+
+if args.width is not None:
     print_width = args.width
     if print_width < 3:
         print("Error: Width < 3")
@@ -18,18 +26,20 @@ if args.width != None:
 else:
     print_width = int(0.6 * 80)
 
-tm = time.localtime()
-if tm.tm_year % 4 == True:
-    days_year = 366
-else:
-    days_year = 365
+now = datetime.now()
+tm_yday = int(now.strftime('%j'))
+current_year = now.year
+days_year = (
+    datetime(current_year + 1, 1, 1) -
+    datetime(current_year, 1, 1)
+).days
 
-year_ratio = tm.tm_yday / days_year
+year_ratio = tm_yday / days_year
 year_percent = year_ratio * 100
 
 print(
     "It's day ",
-    tm.tm_yday,
+    tm_yday,
     " of the year(",
     days_year,
     "). That's already ",
