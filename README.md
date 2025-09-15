@@ -15,6 +15,6 @@ Version <upstream_major>.<upstream_minor>-<rewrite_major>.<rewrite_patch>
 
 ## License
 
-Original license (MIT, Copyright 2024 酸柠檬猹/SourLemonJuice): [LICENSE.original](./LICENSE.original)
+[Original license (MIT, Copyright 2024 酸柠檬猹/SourLemonJuice)](./io.github.SourLemonJuice.LICENSE)
 
 Published under BSD 3-Clause "New" or "Revised" License license.
